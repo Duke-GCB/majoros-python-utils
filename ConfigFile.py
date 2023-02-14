@@ -16,6 +16,7 @@ import re
 #   configFile=ConfigFile(filename)
 #   value=configFile.lookup(key)
 #   value=configFile.lookupOrDie(key)
+#   list=configFile.lookupList(key,sep=", ")
 # Private methods:
 #   self.load(filename)
 ######################################################################
@@ -28,6 +29,11 @@ class ConfigFile:
         self.hash={}
         self.load(filename)
 
+    def lookupList(self,key,sep=", "):
+        value=self.lookup(key)
+        if(value is None): return value
+        return value.split(sep)
+        
     def lookup(self,key):
         return self.hash[key]
 

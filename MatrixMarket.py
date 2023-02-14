@@ -23,7 +23,7 @@ rex=Rex()
 #    nextLine : string
 # Instance Methods:
 #    MatrixMarket(filename)
-#    nextGroup(self,colIndex)
+#    nextGroup(self,colIndex) # returns array of records
 #    getHeader()
 # Class Methods:
 #    allGroups=loadFile(filename,colIndex)
@@ -65,7 +65,8 @@ class MatrixMarket:
             if(len(fields)==0): return None
             if(prevID is None): prevID=int(fields[colIndex])
             if(colIndex>len(fields)-1):
-                raise Exception("colIndex=",colIndex,"len(fields)=",len(fields))
+                raise Exception("colIndex=",colIndex,"len(fields)=",
+                                len(fields))
             thisID=int(fields[colIndex])
             if(thisID!=prevID):
                 self.nextLine=line

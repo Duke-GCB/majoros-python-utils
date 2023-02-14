@@ -12,20 +12,25 @@ import sys
 
 #=========================================================================
 # Attributes:
-#   iter
+#   iter = iterator for the subprocess lines
+#   p = subprocess
 # Instance Methods:
 #   pipe=Pipe(command)
 #   line=pipe.readline()
+#   close()
 # Class Methods:
 #   output=Pipe.run(command)
 #=========================================================================
 class Pipe:
     """Pipe reads output from a shell command"""
     def __init__(self,cmd):
-        p=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True,
+        self.p=subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True,
                            stderr=subprocess.STDOUT)
-        self.iter=iter(p.stdout.readline, b'')
+        self.iter=iter(self.p.stdout.readline, b'')
 
+    def close(self):
+        self.p.terminate()
+        
     def readline(self):
         line=next(self.iter,None)
         if(line is None): return None
