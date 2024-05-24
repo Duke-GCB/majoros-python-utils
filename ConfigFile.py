@@ -29,12 +29,12 @@ class ConfigFile:
         self.hash={}
         self.load(filename)
 
-    def lookupList(self,key,sep=", "):
+    def lookupList(self,key,sep=",\s*"):
         value=self.lookup(key)
         if(value is None): return value
-        return value.split(sep)
+        return re.split(sep, value)
 
-    def lookupListOrDie(self,key,sep=", "):
+    def lookupListOrDie(self,key,sep=",\s*"):
         if(self.hash[key] is None):
             raise Exception("$key not defined in config file\n")
         return self.lookupList(key, sep)
