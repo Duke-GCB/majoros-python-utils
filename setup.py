@@ -9,7 +9,7 @@ py_modules = [f[:-3] for f in os.listdir('.')
 
 setup(
     name='majoros-utils',
-    version='0.1.2',
+    version='0.1.3',
     py_modules=py_modules,
     description="Majoros lab utility classes",
     author="Bill Majoros",
