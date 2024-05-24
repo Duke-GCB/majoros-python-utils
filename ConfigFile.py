@@ -33,7 +33,12 @@ class ConfigFile:
         value=self.lookup(key)
         if(value is None): return value
         return value.split(sep)
-        
+
+    def lookupListOrDie(self,key,sep=", "):
+        if(self.hash[key] is None):
+            raise Exception("$key not defined in config file\n")
+        return self.lookupList(key, sep)
+
     def lookup(self,key):
         return self.hash[key]
 
