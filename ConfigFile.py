@@ -35,16 +35,16 @@ class ConfigFile:
         return re.split(sep, value)
 
     def lookupListOrDie(self,key,sep=",\s*"):
-        if(self.hash[key] is None):
-            raise Exception("$key not defined in config file\n")
+        if(key not in self.hash):
+            raise Exception(f"{key} not defined in config file\n")
         return self.lookupList(key, sep)
 
     def lookup(self,key):
-        return self.hash[key]
+        return self.hash.get(key)
 
     def lookupOrDie(self,key):
-        if(self.hash[key] is None):
-            raise Exception("$key not defined in config file\n")
+        if(key not in self.hash):
+            raise Exception(f"{key} not defined in config file\n")
         return self.hash[key]
 
     def load(self,filename):
